@@ -32,7 +32,7 @@ func NewZap(_conf *Config, ll *lumberjack.Logger) (*zap.Logger, func(), error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	enc := zapcore.NewJSONEncoder(zapcore.EncoderConfig{
+	enc := zapcore.NewConsoleEncoder(zapcore.EncoderConfig{
 		MessageKey:     "msg",
 		LevelKey:       "level",
 		TimeKey:        "ts",
