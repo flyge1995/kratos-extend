@@ -36,3 +36,17 @@ func (c *Config) LoadEnvAndConfigFile(cfgFile string, cfgObj any) error {
 	err = c.v.Unmarshal(cfgObj)
 	return err
 }
+
+func (c *Config) LoadConfigFile(cfgFile string, cfgObj any) error {
+	if cfgFile != "" {
+		c.v.SetConfigFile(cfgFile)
+	}
+
+	err := c.v.ReadInConfig()
+	if err != nil {
+		return err
+	}
+
+	err = c.v.Unmarshal(cfgObj)
+	return err
+}
