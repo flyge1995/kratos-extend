@@ -24,4 +24,5 @@ type KVConfig struct {
 	Name    string `mapstructure:"name"`
 	Version string `mapstructure:"version"`
 	ID      string `mapstructure:"id"`
+	Trace   bool   `mapstructure:"trace"`
 }

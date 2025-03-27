@@ -24,6 +24,7 @@ func (s *Server) Start(ctx context.Context) error {
 func (s *Server) Stop(ctx context.Context) error {
 	select {
 	case <-ctx.Done():
+		return ctx.Err()
 	case <-s.crontab.Stop().Done():
 	}
 	return nil

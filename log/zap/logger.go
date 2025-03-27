@@ -86,11 +86,20 @@ func NewLogger(kv KV, logger *zap.Logger) log.Logger {
 
 func NewKV(c *Config) KV {
 	_conf := c.KV
-	return []any{
-		"service.id", _conf.ID,
-		"service.name", _conf.Name,
-		"service.version", _conf.Version,
-		"trace.id", tracing.TraceID(),
-		"span.id", tracing.SpanID(),
+
+	kvs := make([]any, 0, 10)
+	if _conf.ID != "" {
+		kvs = append(kvs, "service.id", _conf.ID)
 	}
+	if _conf.Name != "" {
+		kvs = append(kvs, "service.name", _conf.Name)
+	}
+	if _conf.Version != "" {
+		kvs = append(kvs, "service.version", _conf.Version)
+	}
+	if _conf.Trace {
+		kvs = append(kvs, "trace.id", tracing.TraceID())
+		kvs = append(kvs, "span.id", tracing.SpanID())
+	}
+	return kvs
 }
